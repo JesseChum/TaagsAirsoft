@@ -1,26 +1,58 @@
 @import "tailwindcss";
 
+/* Brand tokens. Change --color-accent to restyle buttons and highlights. */
+@theme {
+  --color-accent: #e8702a;
+  --color-accent-hover: #f08a45;
+  --color-ink: #12140f;
+  --color-ink-deep: #0b0c09;
+  --color-panel: #1b1e16;
+  --color-panel-alt: #1f2319;
+  --color-line: #2a2d23;
+  --color-line-soft: #2f3328;
+  --color-bone: #ece8dc;
+  --color-bone-dim: #d6d2c4;
+  --color-stone: #c9c5b4;
+  --color-sand: #bdb9aa;
+  --color-muted: #a8a695;
+
+  --font-display: var(--font-big-shoulders), sans-serif;
+  --font-sans: var(--font-barlow), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), monospace;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --hero-overlay: 0.55; /* how dark the layer over the hero photos is (0-1) */
+  --hero-speed: 24s; /* how long one full loop of the hero slideshow takes */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-ink);
+  color: var(--color-bone);
+  font-family: var(--font-sans);
+}
+
+@layer base {
+  a:hover {
+    color: var(--color-accent-hover);
+  }
+}
+
+/* Hero slideshow: 5 slides, the 5th repeats the 1st so the loop is seamless. */
+@keyframes hero-slide {
+  0%, 20% { transform: translateX(0); }
+  25%, 45% { transform: translateX(-20%); }
+  50%, 70% { transform: translateX(-40%); }
+  75%, 95% { transform: translateX(-60%); }
+  100% { transform: translateX(-80%); }
+}
+
+.hero-track {
+  animation: hero-slide var(--hero-speed) cubic-bezier(0.7, 0, 0.3, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-track {
+    animation: none;
+  }
 }
