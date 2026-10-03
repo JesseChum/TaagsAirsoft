@@ -39,6 +39,9 @@ export const footerLinks = [
   { href: "/privacy", label: "Privacy" },
 ];
 
-export const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-  site.address.join(", "),
-)}`;
+// The TAAGS Airsoft pin on Google Maps.
+const fieldLocation = "47.3519099,-122.196479";
+
+export const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${fieldLocation}`;
+
+export const mapEmbedUrl = `https://maps.google.com/maps?q=${fieldLocation}&z=16&t=k&output=embed`;

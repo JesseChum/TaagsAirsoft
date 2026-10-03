@@ -1,15 +1,21 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ButtonLink, Eyebrow, SectionTitle } from "@/components/buttons";
-import { directionsUrl, site } from "@/lib/site";
+import { directionsUrl, mapEmbedUrl, site } from "@/lib/site";
+import aboutPhoto from "@/public/images/about-group.jpg";
+import hero1 from "@/public/images/hero/hero-1.jpg";
+import hero2 from "@/public/images/hero/hero-2.jpg";
+import hero3 from "@/public/images/hero/hero-3.jpg";
+import hero4 from "@/public/images/hero/hero-4.jpg";
 
-// Replace each color with a photo, e.g. { image: "/hero/field.jpg" }.
-// The last slide must repeat the first so the loop is seamless.
+// `position` picks which part of the photo stays visible when it's cropped
+// to fill the hero. The last slide must repeat the first so the loop is seamless.
 const heroSlides = [
-  { color: "#39412c", label: "PHOTO 01 · [REPLACE WITH FIELD PHOTO]" },
-  { color: "#3b3d38", label: "PHOTO 02 · [REPLACE WITH ACTION SHOT]" },
-  { color: "#4d4231", label: "PHOTO 03 · [REPLACE WITH TEAM PHOTO]" },
-  { color: "#2d383c", label: "PHOTO 04 · [REPLACE WITH GEAR PHOTO]" },
-  { color: "#39412c", label: "PHOTO 01 · [REPLACE WITH FIELD PHOTO]" },
+  { image: hero1, alt: "Four players in different camo loadouts posing in the woods", position: "center 40%" },
+  { image: hero2, alt: "A squad of players posing on the field in front of tall evergreens", position: "center 58%" },
+  { image: hero3, alt: "Players moving through a wooden structure on the field", position: "center 25%" },
+  { image: hero4, alt: "Two teams lining up for a game briefing", position: "center 55%" },
+  { image: hero1, alt: "", position: "center 40%" },
 ];
 
 const stats = [
@@ -34,10 +40,17 @@ function Hero() {
     <section className="relative h-[680px] overflow-hidden bg-panel md:h-[800px]">
       <div className="hero-track absolute inset-y-0 left-0 flex w-[500%]">
         {heroSlides.map((slide, i) => (
-          <div key={i} className="relative h-full w-1/5 shrink-0" style={{ background: slide.color }}>
-            <span className="absolute right-4 bottom-24 z-10 font-mono text-xs tracking-widest text-stone md:right-16">
-              {slide.label}
-            </span>
+          <div key={i} className="relative h-full w-1/5 shrink-0">
+            <Image
+              src={slide.image}
+              alt={slide.alt}
+              fill
+              priority={i === 0}
+              placeholder="blur"
+              sizes="100vw"
+              className="object-cover"
+              style={{ objectPosition: slide.position }}
+            />
           </div>
         ))}
       </div>
@@ -46,7 +59,7 @@ function Hero() {
       <div className="absolute top-40 left-4 right-4 z-10 flex max-w-[820px] flex-col gap-7 md:top-[250px] md:left-16">
         <div className="flex items-center gap-3.5 font-mono text-[13px] uppercase tracking-[0.14em] text-accent">
           <span className="h-0.5 w-10 bg-accent" />
-          <span>[{site.city}] · T.A.A.G.S Outdoor Airsoft Field</span>
+          <span>{site.city} · T.A.A.G.S Outdoor Airsoft Field</span>
         </div>
         <h1 className="m-0 font-display text-7xl font-black uppercase leading-[0.88] tracking-[0.01em] text-white md:text-[128px]">
           Gear up.
@@ -69,7 +82,6 @@ function Hero() {
           <span className="h-[3px] w-6 bg-bone/35" />
           <span className="h-[3px] w-6 bg-bone/35" />
         </div>
-        <span>SCROLL ↓</span>
       </div>
     </section>
   );
@@ -90,9 +102,9 @@ function WhatWeRun() {
         <div className="flex flex-col justify-center gap-4 p-8 md:p-12">
           <h3 className="m-0 font-display text-4xl font-extrabold uppercase md:text-[40px]">Rental Packages</h3>
           <p className="m-0 max-w-[520px] text-lg leading-relaxed text-sand">
-            First time? Rent a replica, eye protection and BBs on site. [WHAT&apos;S INCLUDED]
+            First time? Rent a replica, eye protection and BBs on site.
           </p>
-          <span className="font-mono text-sm text-accent">FROM [PRICE]</span>
+          <span className="font-mono text-sm text-accent">FROM $30</span>
         </div>
       </div>
     </section>
@@ -102,8 +114,15 @@ function WhatWeRun() {
 function About() {
   return (
     <section className="flex flex-col gap-12 border-t border-line bg-panel px-4 py-20 md:px-16 md:py-28 lg:flex-row lg:items-center lg:gap-20">
-      <div className="flex h-72 w-full shrink-0 items-end rounded-md bg-[#39412c] p-6 font-mono text-xs tracking-widest text-stone md:h-[460px] lg:w-[600px]">
-        [ABOUT PHOTO · FIELD OR CREW]
+      <div className="relative h-72 w-full shrink-0 overflow-hidden rounded-md bg-[#39412c] md:h-[460px] lg:w-[600px]">
+        <Image
+          src={aboutPhoto}
+          alt="T.A.A.G.S. players posing for a group photo on the field"
+          fill
+          placeholder="blur"
+          sizes="(min-width: 1024px) 600px, 100vw"
+          className="object-cover"
+        />
       </div>
       <div className="flex grow flex-col gap-6">
         <SectionTitle>About T.A.A.G.S Airsoft</SectionTitle>
@@ -154,9 +173,13 @@ function Contact() {
           </ButtonLink>
         </div>
       </div>
-      <div className="flex h-80 grow items-center justify-center rounded-md border border-line bg-panel-alt font-mono text-xs tracking-[0.12em] text-muted md:h-[480px]">
-        [MAP EMBED]
-      </div>
+      <iframe
+        src={mapEmbedUrl}
+        title="Map to the T.A.A.G.S. Airsoft field"
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+        className="h-80 w-full grow rounded-md border border-line bg-panel-alt md:h-[480px] lg:w-auto"
+      />
     </section>
   );
 }
