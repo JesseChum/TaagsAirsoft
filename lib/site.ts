@@ -15,7 +15,7 @@ export const site = {
 export const mainNav = [
   { href: "/", label: "Home" },
   { href: "/events", label: "Events" },
-  { href: "/game-modes", label: "Game Modes" },
+  { href: "/field", label: "Field" },
   { href: "/rentals", label: "Rentals" },
   { href: "/gallery", label: "Gallery" },
   { href: "/faq", label: "FAQ" },
