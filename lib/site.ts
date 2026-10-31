@@ -34,8 +34,8 @@ export const socials = {
 };
 
 export const footerLinks = [
-  { href: "/field-rules", label: "Field Rules" },
-  { href: "/waiver", label: "Waiver" },
+  { href: "/field#rules", label: "Field Rules" },
+  { href: "/field#waiver", label: "Waiver" },
   { href: "/privacy", label: "Privacy" },
 ];
 
