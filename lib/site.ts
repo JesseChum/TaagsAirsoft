@@ -16,15 +16,14 @@ export const mainNav = [
   { href: "/", label: "Home" },
   { href: "/events", label: "Events" },
   { href: "/field", label: "Field" },
-  { href: "/rentals", label: "Rentals" },
-  { href: "/gallery", label: "Gallery" },
+  { href: "/shop", label: "Shop" },
+  { href: "/community", label: "Community" },
   { href: "/faq", label: "FAQ" },
 ];
 
 export const utilityLinks = [
   { href: "#", label: "Community marketplace" },
-  { href: "#", label: "Intheater Airsoft" },
-  { href: "#", label: "SIGMA Airsoft" },
+  { href: "/partners", label: "Our Partners" },
 ];
 
 export const socials = {

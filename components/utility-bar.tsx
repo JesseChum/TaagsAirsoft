@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { site, utilityLinks } from "@/lib/site";
 
 export function UtilityBar() {
@@ -9,9 +10,9 @@ export function UtilityBar() {
       </div>
       <div className="hidden items-center gap-7 md:flex">
         {utilityLinks.map((link) => (
-          <a key={link.label} href={link.href} className="text-muted">
+          <Link key={link.label} href={link.href} className="text-muted">
             {link.label}
-          </a>
+          </Link>
         ))}
       </div>
     </div>

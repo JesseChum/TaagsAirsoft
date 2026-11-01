@@ -9,6 +9,11 @@ const variants = {
   outline: "border-[1.5px] border-bone/60 text-bone",
 };
 
+/** The button look, for a real <button> that should match ButtonLink. */
+export function buttonClasses(variant: keyof typeof variants = "primary") {
+  return `${base} ${variants[variant]} cursor-pointer`;
+}
+
 type Props = ComponentProps<"a"> & { href: string; variant?: keyof typeof variants };
 
 // Internal paths use next/link; mailto:, tel: and external URLs use a plain <a>.

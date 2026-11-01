@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ButtonLink, Eyebrow, SectionTitle } from "@/components/buttons";
+import { ContactButton } from "@/components/contact-dialog";
 import { directionsUrl, mapEmbedUrl, site } from "@/lib/site";
 import aboutPhoto from "@/public/images/about-group.jpg";
 import hero1 from "@/public/images/hero/hero-1.jpg";
@@ -167,7 +168,7 @@ function Contact() {
           ))}
         </div>
         <div className="flex flex-wrap gap-4">
-          <ButtonLink href={`mailto:${site.email}`}>Send a Message</ButtonLink>
+          <ContactButton />
           <ButtonLink href={directionsUrl} variant="outline" target="_blank" rel="noopener noreferrer">
             Get Directions
           </ButtonLink>
